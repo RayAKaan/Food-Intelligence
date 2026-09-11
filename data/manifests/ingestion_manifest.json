@@ -1,0 +1,21 @@
+{
+  "dataset_version": "INDIAN_RECIPE_CORPUS_V1",
+  "status": "BLOCKED_LEGAL_REVIEW",
+  "dataset": null,
+  "version": null,
+  "source": null,
+  "checksum": null,
+  "retrieved_at": "2026-09-11",
+  "license": null,
+  "processing_pipeline_version": "recipe-ingestion-0.2.0",
+  "record_count": 0,
+  "reason": "All >=1000 Indian recipe candidates identified in this audit have unresolved underlying-source rights; no raw snapshot was acquired.",
+  "pipeline_capability": {
+    "validated_on": "test_snapshot_2026-09-11",
+    "checksum_verification": "sha256 required before row mapping",
+    "column_overflow_gate": "rows with more fields than headers are rejected, not silently dropped",
+    "schema_detection": "archana_style confidence 1.0 on validation snapshot",
+    "fail_closed_gates": ["missing snapshot", "checksum mismatch", "incomplete manifest", "column overflow"],
+    "ingestion_ready": true
+  }
+}
