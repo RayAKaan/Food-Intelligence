@@ -1,0 +1,22 @@
+{
+  "experiment_id": "003_real_food_corpus",
+  "title": "High-integrity Indian culinary corpus admission and evidence baselines",
+  "date": "2026-09-11",
+  "status": "BLOCKED_PENDING_ELR_ACCESS",
+  "scientific_question": "Can provenance-aware real Indian culinary records support measurable computational food reasoning at small scale?",
+  "research_corpus": "INDIAN_FOOD_RESEARCH_V1",
+  "commercial_corpus": "INDIAN_FOOD_COMMERCIAL_V1",
+  "quarantine_corpus": "INDIAN_FOOD_QUARANTINE_V1",
+  "admitted_research_records": 0,
+  "admitted_commercial_records": 1,
+  "benchmarks": {
+    "held_out_ingredient_pair_prediction": "NOT_RUN",
+    "recipe_retrieval": "NOT_RUN",
+    "ingredient_resolution": "NOT_RUN",
+    "culinary_graph": "NOT_RUN",
+    "novelty_baseline": "NOT_RUN"
+  },
+  "blocker": "ELR files require authenticated Hugging Face access and acceptance of contact-sharing conditions; no credentials were supplied. INDB remains source-level quarantine.",
+  "negative_result": "No recipe benchmark was fabricated from the software fixture or the one-record Sangat nutrition supplement.",
+  "next_action": "Acquire an authorized ELR snapshot, record exact revision/checksum, then run parser, canonicalization, split, quality, coverage, pairing, retrieval, and resolution reports."
+}
