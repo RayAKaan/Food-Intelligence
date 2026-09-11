@@ -1,0 +1,30 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.eggs/
+
+# Tooling caches
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Virtual environments
+.venv/
+venv/
+
+# Editors / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Raw third-party data snapshots (acquisition is a legal decision; see docs/data-acquisition-blocker.md)
+data/research/raw/
+data/research/snapshot/
+data/commercial/*/raw/*
+!data/commercial/INDIAN_FOOD_COMMERCIAL_V1/raw/dal-tadka.json
