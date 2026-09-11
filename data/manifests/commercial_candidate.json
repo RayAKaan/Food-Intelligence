@@ -1,0 +1,29 @@
+{
+  "manifest": "commercial_candidate",
+  "entries": [
+    "FoodOn",
+    "USDA FoodData Central"
+  ],
+  "recipe_entries": [],
+  "supplemental_entries": [
+    {
+      "dataset_name": "Sangat Food DB",
+      "status": "COMMERCIAL_SAFE_WITH_ATTRIBUTION_SHAREALIKE",
+      "role": "nutrition/portion supplement only",
+      "approximate_size": "seed target 200 dishes"
+    }
+  ],
+  "excluded_by_default": [
+    "EmTpro01/indian-recipe-cleaned",
+    "ELR-1000",
+    "Indian 6000+ Recipes",
+    "INDoRI",
+    "Indian Nutrient Databank (INDB)",
+    "RecipeDB",
+    "Recipe1M+",
+    "FooDB",
+    "FlavorDB2",
+    "Pyrfume"
+  ],
+  "gate": "legal review and source-version verification required before release"
+}
