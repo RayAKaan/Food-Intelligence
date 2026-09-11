@@ -1,0 +1,88 @@
+{
+  "experiment_id": "001_baseline_fixture",
+  "warning": "Synthetic fixture only; no scientific generalization.",
+  "metrics": {
+    "structured_mean_recall@5": 1.0,
+    "semantic_mean_recall@5": 1.0
+  },
+  "cases": [
+    {
+      "target": {
+        "sour": 0.8,
+        "smoky": 0.8
+      },
+      "expected": [
+        "black cardamom",
+        "tamarind"
+      ],
+      "structured_recall@5": 1.0,
+      "semantic_recall@5": 1.0,
+      "structured_ranked": [
+        "black cardamom",
+        "chili",
+        "coconut",
+        "cumin",
+        "garlic"
+      ],
+      "semantic_ranked": [
+        "black cardamom",
+        "chili",
+        "coconut",
+        "coriander",
+        "cumin"
+      ]
+    },
+    {
+      "target": {
+        "nutty": 0.8,
+        "citrus": 0.4
+      },
+      "expected": [
+        "ginger",
+        "sesame"
+      ],
+      "structured_recall@5": 1.0,
+      "semantic_recall@5": 1.0,
+      "structured_ranked": [
+        "sesame",
+        "coconut",
+        "ginger",
+        "coriander",
+        "black cardamom"
+      ],
+      "semantic_ranked": [
+        "sesame",
+        "coconut",
+        "coriander",
+        "ginger",
+        "black cardamom"
+      ]
+    },
+    {
+      "target": {
+        "creamy": 0.6,
+        "sour": 0.8
+      },
+      "expected": [
+        "coconut",
+        "tamarind"
+      ],
+      "structured_recall@5": 1.0,
+      "semantic_recall@5": 1.0,
+      "structured_ranked": [
+        "coconut",
+        "black cardamom",
+        "chili",
+        "cumin",
+        "garlic"
+      ],
+      "semantic_ranked": [
+        "coconut",
+        "black cardamom",
+        "chili",
+        "coriander",
+        "cumin"
+      ]
+    }
+  ]
+}
