@@ -1,0 +1,26 @@
+{
+  "corpus_version": "INDIAN_FOOD_RESEARCH_V1",
+  "status": "PENDING_ACCESS",
+  "admitted_datasets": [],
+  "candidate_datasets": [
+    {
+      "dataset": "ELR-1000",
+      "url": "https://huggingface.co/datasets/karya/ELR-1000",
+      "repository_url": "https://github.com/karya-inc/elr-1000",
+      "version": "repository main README updated 2026-09-03; exact data revision pending access",
+      "license": "KPL BY-NC-SA-FS 1.0",
+      "access_status": "requires Hugging Face login and acceptance of contact-sharing conditions",
+      "expected_records": 1073,
+      "checksum": null,
+      "retrieved_at": null,
+      "raw_snapshot_path": null,
+      "conditions": ["research/noncommercial only", "attribution", "share-alike", "GPL requirement for software systems incorporating material"]
+    }
+  ],
+  "record_count": 0,
+  "parser_version": "not-run",
+  "normalization_version": "not-run",
+  "ontology_version": "not-run",
+  "split_version": "not-run",
+  "reconstruction_status": "not reconstructible until authorized snapshot is acquired"
+}
