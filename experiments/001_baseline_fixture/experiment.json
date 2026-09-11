@@ -1,0 +1,10 @@
+{
+  "experiment_id":"001_baseline_fixture",
+  "hypothesis":"The structured pipeline can execute and expose interpretable component scores without treating fixture values as facts.",
+  "dataset_version":"seed-fixture-0.1",
+  "code_version":"phase1-mvp-0.1",
+  "configuration":{"k":5,"target_cases":3},
+  "baseline":"semantic-only vs structured",
+  "status":"software_validation_only",
+  "conclusion":"The harness executes and emits metrics; fixture scores are not evidence for the scientific hypothesis. Replace with licensed corpus."
+}
