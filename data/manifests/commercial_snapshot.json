@@ -1,0 +1,21 @@
+{
+  "corpus_version": "INDIAN_FOOD_COMMERCIAL_V1",
+  "status": "ADMITTED_SUPPLEMENT_ONLY",
+  "datasets": [
+    {
+      "dataset": "Sangat Food DB",
+      "source_id": "sangat-food-db",
+      "url": "https://github.com/akashthawaitcc/sangat-food-db",
+      "version": "main at commit d570685d8d5dc8351d8ff096c7867cce4d61e97f",
+      "license": "CC BY-SA 4.0 for data; MIT for tooling",
+      "license_status": "COMMERCIAL_OPEN_WITH_ATTRIBUTION_SHAREALIKE",
+      "retrieved_at": "2026-09-11",
+      "raw_files": [{"path": "data/commercial/INDIAN_FOOD_COMMERCIAL_V1/raw/dal-tadka.json", "sha256": "9eefe08c7f5e05896e3caa97c915c9e72b0c93cb83048a200323272ddff35e7a"}],
+      "record_count": 1,
+      "role": "nutrition, portion, and pipeline sanity-check supplement; not a recipe/process corpus"
+    }
+  ],
+  "record_count": 1,
+  "research_only_dependencies": [],
+  "reconstruction_status": "reconstructible for recorded file from repository commit"
+}
