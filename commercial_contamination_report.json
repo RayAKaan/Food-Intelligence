@@ -1,0 +1,7 @@
+{
+  "status":"PASS",
+  "commercial_source_ids":["FoodOn","USDA FoodData Central"],
+  "contaminating_records":[],
+  "count":0,
+  "note":"No real recipe records have entered the commercial candidate track. Synthetic fixture data is not part of any commercial manifest."
+}
