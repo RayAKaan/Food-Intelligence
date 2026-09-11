@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "food-intelligence"
+version = "0.1.0"
+description = "Provenance-first computational food intelligence research engine (Phase 1E)"
+readme = "README.md"
+requires-python = ">=3.10"
+authors = [{ name = "Food Intelligence Research Project" }]
+keywords = ["food", "computational-gastronomy", "ontology", "retrieval", "research"]
+
+[project.scripts]
+food = "food_intelligence.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
