@@ -1,0 +1,26 @@
+{
+  "manifest": "research_allowed",
+  "entries": [
+    {
+      "dataset_name": "ELR-1000",
+      "status": "RESEARCH_ALLOWED_GATED",
+      "license": "KPL BY-NC-SA-FS 1.0",
+      "url": "https://github.com/karya-inc/elr-1000",
+      "approximate_size": 1073,
+      "conditions": [
+        "noncommercial only",
+        "same-license derivatives",
+        "GPL requirement for software systems incorporating the material",
+        "acquire and retain gated HF snapshot and terms"
+      ]
+    }
+  ],
+  "excluded_pending_review": [
+    "EmTpro01/indian-recipe-cleaned",
+    "INDoRI",
+    "Indian Nutrient Databank (INDB)",
+    "Archana-derived mirrors"
+  ],
+  "status": "ELR_ADMITTED_PENDING_SNAPSHOT",
+  "note": "ELR is admitted as a research candidate based on repository license and explicit consent claims; no raw snapshot has been downloaded in this environment."
+}
