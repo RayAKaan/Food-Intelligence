@@ -1,0 +1,19 @@
+{
+  "data_status": "SYNTHETIC",
+  "source_id": "SYNTHETIC_TEST_DATA",
+  "warning": "Software integration fixture only; not research evidence.",
+  "ingredients": [
+    {"id":"tomato","state":"raw","compounds":["c1","c2"],"taste":{"sour":0.8,"umami":0.4},"odor":{"fruity":0.7,"green":0.2},"texture":{"juicy":0.8}},
+    {"id":"coconut","state":"milk","compounds":["c3","c4"],"taste":{"sweet":0.5,"umami":0.1},"odor":{"creamy":0.7,"nutty":0.6},"texture":{"creamy":0.9}},
+    {"id":"black_cardamom","state":"whole","compounds":["c5","c6"],"taste":{"bitter":0.2},"odor":{"smoky":0.9,"camphoraceous":0.5},"texture":{}},
+    {"id":"sesame","state":"roasted","compounds":["c4","c7"],"taste":{"umami":0.3,"bitter":0.2},"odor":{"nutty":0.9,"roasted":0.8},"texture":{"crunchy":0.8}},
+    {"id":"ginger","state":"crushed","compounds":["c8"],"taste":{"pungent":0.8},"odor":{"citrus":0.5,"spicy":0.8},"texture":{}},
+    {"id":"tamarind","state":"paste","compounds":["c2","c9"],"taste":{"sour":0.9,"sweet":0.2},"odor":{"fruity":0.5},"texture":{"viscous":0.7}},
+    {"id":"onion","state":"fried","compounds":["c10"],"taste":{"sweet":0.6,"umami":0.3},"odor":{"caramelized":0.8,"sulfurous":0.3},"texture":{"soft":0.6}},
+    {"id":"garlic","state":"raw","compounds":["c11"],"taste":{"pungent":0.7},"odor":{"sulfurous":0.9},"texture":{"crisp":0.4}},
+    {"id":"cumin","state":"toasted","compounds":["c12"],"taste":{"bitter":0.2},"odor":{"earthy":0.9,"roasted":0.5},"texture":{}},
+    {"id":"coriander","state":"fresh","compounds":["c13"],"taste":{"sweet":0.2},"odor":{"citrus":0.6,"herbal":0.8},"texture":{"leafy":0.6}},
+    {"id":"yogurt","state":"fermented","compounds":["c14"],"taste":{"sour":0.7,"umami":0.2},"odor":{"fermented":0.8},"texture":{"creamy":0.8}},
+    {"id":"rice","state":"cooked","compounds":[],"taste":{},"odor":{},"texture":{"soft":0.9}}
+  ]
+}
