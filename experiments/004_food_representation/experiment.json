@@ -1,0 +1,12 @@
+{
+  "experiment_id": "004_food_representation",
+  "hypothesis": "A decomposable, provenance-aware multi-view ingredient representation can be integrated and retrieved without collapsing chemical, taste, odor, texture, culinary, and process evidence.",
+  "data_sources": ["SYNTHETIC_TEST_DATA only for software integration", "ELR-1000 pending authorized access", "FoodOn/FDC/FooDB/FlavorDB2/Pyrfume/Phenol-Explorer/FEMA adapters metadata-only"],
+  "data_status": "NO_SCIENTIFIC_DATA_ADMITTED",
+  "representation_versions": {"molecular":"explicit-v1", "sensory":"observation-v1", "odor":"observation-v1", "retrieval":"multiview-v1", "provenance":"evidence-v1"},
+  "configuration": {"synthetic_fixture": "data/fixtures/synthetic_representation_fixture.json", "missing_values": "NULL plus observed mask", "fusion": "late fusion available; weights not validated"},
+  "planned_benchmarks": ["ingredient similarity", "molecular retrieval", "sensory retrieval", "odor retrieval", "hybrid retrieval", "held-out pairing", "sensory-target retrieval", "evidence attribution"],
+  "expected_failure_modes": ["source license mismatch", "compound occurrence mistaken for sensory causality", "raw/cooked state confusion", "missing treated as zero", "conflicting source overwrite", "research data entering commercial path", "synthetic fixture leakage"],
+  "results": null,
+  "claim_boundary": "No scientific performance claim is permitted from this experiment record."
+}
