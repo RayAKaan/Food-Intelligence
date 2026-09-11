@@ -1,0 +1,342 @@
+{
+  "registry_version": "1.0.0",
+  "retrieved_at": "2026-09-11",
+  "entries": [
+    {
+      "dataset_name": "FoodOn",
+      "provider": "FoodOn/OBO Foundry",
+      "url": "https://foodon.org/",
+      "version": "2025-08-01",
+      "data_types": [
+        "ontology",
+        "food identities",
+        "processes"
+      ],
+      "approximate_size": ">9000 food products",
+      "license": "CC BY 4.0",
+      "commercial_use_status": "COMMERCIAL_SAFE",
+      "redistribution_status": "allowed_with_attribution",
+      "research_only_status": false,
+      "confidence": "high",
+      "recommended_usage": "canonical identifiers and labels",
+      "known_limitations": "ontology coverage is not a sensory or compatibility model"
+    },
+    {
+      "dataset_name": "USDA FoodData Central",
+      "provider": "USDA ARS",
+      "url": "https://fdc.nal.usda.gov/",
+      "version": "release-dependent",
+      "data_types": [
+        "composition",
+        "nutrients",
+        "foods"
+      ],
+      "approximate_size": ">600000 foods",
+      "license": "USDA public-domain terms; verify release",
+      "commercial_use_status": "COMMERCIAL_SAFE",
+      "redistribution_status": "verify_export_terms",
+      "research_only_status": false,
+      "confidence": "high",
+      "recommended_usage": "composition and food identifiers",
+      "known_limitations": "US-centric; limited process/sensory data"
+    },
+    {
+      "dataset_name": "FooDB",
+      "provider": "University of Alberta",
+      "url": "https://foodb.ca/",
+      "version": "1.0 / release-dependent",
+      "data_types": [
+        "food-compound mappings",
+        "structures",
+        "concentrations"
+      ],
+      "approximate_size": "~9461 foods, ~10898 compounds in cited use",
+      "license": "CC BY-NC 4.0",
+      "commercial_use_status": "LEGAL_REVIEW_REQUIRED",
+      "redistribution_status": "permission_required_for_commercial",
+      "research_only_status": true,
+      "confidence": "high",
+      "recommended_usage": "research-only molecular adapter",
+      "known_limitations": "concentration and food coverage vary; non-commercial default"
+    },
+    {
+      "dataset_name": "FlavorDB2",
+      "provider": "IIIT Delhi",
+      "url": "https://cosylab.iiitd.edu.in/flavordb2/",
+      "version": "release-dependent",
+      "data_types": [
+        "flavor molecules",
+        "taste/odor descriptors",
+        "thresholds"
+      ],
+      "approximate_size": "25595 molecules; 936 natural ingredients",
+      "license": "CC BY-NC-SA 3.0",
+      "commercial_use_status": "RESEARCH_ONLY",
+      "redistribution_status": "share_alike_noncommercial",
+      "research_only_status": true,
+      "confidence": "high",
+      "recommended_usage": "research-only sensory/odor adapter",
+      "known_limitations": "ingredient association does not prove causal perception"
+    },
+    {
+      "dataset_name": "Pyrfume",
+      "provider": "Pyrfume project",
+      "url": "https://pyrfume.org/",
+      "version": "live archive",
+      "data_types": [
+        "olfactory psychophysics",
+        "odor descriptors"
+      ],
+      "approximate_size": ">40 datasets",
+      "license": "non-commercial except source-specific permissions",
+      "commercial_use_status": "RESEARCH_ONLY",
+      "redistribution_status": "source-dependent",
+      "research_only_status": true,
+      "confidence": "high",
+      "recommended_usage": "research-only odor molecule features",
+      "known_limitations": "molecule-centric; not cooked-dish sensory data"
+    },
+    {
+      "dataset_name": "Open Food Facts",
+      "provider": "Open Food Facts",
+      "url": "https://world.openfoodfacts.org/data",
+      "version": "live export",
+      "data_types": [
+        "products",
+        "ingredients",
+        "nutrition",
+        "allergens"
+      ],
+      "approximate_size": "global crowdsourced database",
+      "license": "ODbL; images CC BY-SA",
+      "commercial_use_status": "LEGAL_REVIEW_REQUIRED",
+      "redistribution_status": "share_alike_database",
+      "research_only_status": false,
+      "confidence": "high",
+      "recommended_usage": "optional packaged-food safety/product enrichment",
+      "known_limitations": "crowdsourced, sparse, packaged-food bias"
+    },
+    {
+      "dataset_name": "Phenol-Explorer",
+      "provider": "INRAE",
+      "url": "http://phenol-explorer.eu/downloads",
+      "version": "3.0",
+      "data_types": [
+        "polyphenols",
+        "processing retention"
+      ],
+      "approximate_size": "502 polyphenols / 452 foods; >37000 points reported",
+      "license": "commercial redistribution requires permission",
+      "commercial_use_status": "LEGAL_REVIEW_REQUIRED",
+      "redistribution_status": "permission_required_for_commercial",
+      "research_only_status": true,
+      "confidence": "high",
+      "recommended_usage": "research-only polyphenol and process evidence",
+      "known_limitations": "narrow chemical class and food/process coverage"
+    },
+    {
+      "dataset_name": "RecipeDB",
+      "provider": "IIIT Delhi",
+      "url": "https://cosylab.iiitd.edu.in/recipedb",
+      "version": "release-dependent",
+      "data_types": [
+        "recipes",
+        "ingredients",
+        "nutrition",
+        "processes"
+      ],
+      "approximate_size": "118171 recipes / 23548 ingredients",
+      "license": "CC BY-NC-SA 3.0",
+      "commercial_use_status": "RESEARCH_ONLY",
+      "redistribution_status": "share_alike_noncommercial",
+      "research_only_status": true,
+      "confidence": "high",
+      "recommended_usage": "research benchmark only",
+      "known_limitations": "source recipe duplication and web bias"
+    },
+    {
+      "dataset_name": "Recipe1M+",
+      "provider": "MIT CSAIL",
+      "url": "https://im2recipe.csail.mit.edu/",
+      "version": "research release",
+      "data_types": [
+        "recipes",
+        "images"
+      ],
+      "approximate_size": "~1 million recipes",
+      "license": "research/non-commercial terms",
+      "commercial_use_status": "RESEARCH_ONLY",
+      "redistribution_status": "restricted",
+      "research_only_status": true,
+      "confidence": "high",
+      "recommended_usage": "research benchmark only",
+      "known_limitations": "non-commercial terms and web recipe bias"
+    },
+    {
+      "dataset_name": "Indian 6000+ Recipes",
+      "provider": "Kanishka Jain / Mendeley",
+      "url": "https://data.mendeley.com/datasets/xsphgmmh7b/1",
+      "version": "1",
+      "data_types": [
+        "Indian recipes",
+        "ingredients",
+        "instructions"
+      ],
+      "approximate_size": ">6000",
+      "license": "catalogued CC BY 4.0; source/crawl rights require verification",
+      "commercial_use_status": "LEGAL_REVIEW_REQUIRED",
+      "redistribution_status": "verify_source_rights",
+      "research_only_status": false,
+      "confidence": "medium",
+      "recommended_usage": "candidate Indian recipe corpus after legal review",
+      "known_limitations": "single source, likely web/cuisine bias, quantities/instructions inconsistent"
+    },
+    {
+      "dataset_name": "INDoRI",
+      "provider": "Khanna, Chattopadhyay, Kundu",
+      "original_source": "seven online recipe platforms",
+      "url": "https://arxiv.org/pdf/2309.10403",
+      "dataset_url": "https://figshare.com/s/12a1bce0210a7f031168",
+      "version": "paper v1 / release access inconsistent",
+      "data_types": [
+        "recipes",
+        "ingredients",
+        "instructions",
+        "cuisine",
+        "category",
+        "preparation time"
+      ],
+      "approximate_size": "5187 recipes; 18 cuisines/regions reported",
+      "license": "CC BY 4.0 displayed on Figshare item",
+      "commercial_use_status": "LEGAL_REVIEW_REQUIRED",
+      "redistribution_status": "LEGAL_REVIEW_REQUIRED",
+      "research_only_status": false,
+      "underlying_content_rights": "NOT_CONFIRMED; paper says seven platforms were crawled",
+      "confidence": "medium",
+      "recommended_usage": "research candidate after rights confirmation",
+      "known_limitations": "public item is private/inconsistent; quantities and process fields require audit"
+    },
+    {
+      "dataset_name": "Indian Nutrient Databank (INDB)",
+      "provider": "Lindsay Jaacks et al.",
+      "original_source": "two cookbooks plus 148 website recipes; USDA/UK/ICMR composition sources",
+      "url": "https://github.com/lindsayjaacks/Indian-Nutrient-Databank-INDB-",
+      "version": "2024/2025 repository",
+      "data_types": [
+        "recipes",
+        "quantities",
+        "units",
+        "servings",
+        "nutrients"
+      ],
+      "approximate_size": "1014 recipes; 1095 raw foods reported",
+      "license": "NOT_CONFIRMED at dataset level",
+      "commercial_use_status": "LEGAL_REVIEW_REQUIRED",
+      "redistribution_status": "source-dependent",
+      "research_only_status": false,
+      "underlying_content_rights": "mixed books, websites, and external composition tables",
+      "confidence": "high",
+      "recommended_usage": "small quantity/nutrition benchmark after source review",
+      "known_limitations": "below scale target; source rights heterogeneous"
+    },
+    {
+      "dataset_name": "RISeC",
+      "provider": "Jiang et al.",
+      "original_source": "CURD and SIMMR recipe instruction corpora",
+      "url": "https://github.com/YiweiJiang2015/RISeC",
+      "version": "v1",
+      "data_types": [
+        "recipe instruction semantics"
+      ],
+      "approximate_size": "260 texts",
+      "license": "MIT repository license; source-chain check",
+      "commercial_use_status": "LEGAL_REVIEW_REQUIRED",
+      "redistribution_status": "check source corpora",
+      "research_only_status": false,
+      "underlying_content_rights": "source corpora require confirmation",
+      "confidence": "medium",
+      "recommended_usage": "process parser regression only",
+      "known_limitations": "not Indian and far below scale target"
+    },
+    {
+      "dataset_name": "EmTpro01/indian-recipe-cleaned",
+      "provider": "EmTpro01 / Hugging Face",
+      "url": "https://huggingface.co/datasets/EmTpro01/indian-recipe-cleaned",
+      "version": "sha 03dacb535808d23cef77d85d643d104794432389",
+      "data_types": [
+        "recipe text",
+        "ingredient text",
+        "instruction text"
+      ],
+      "approximate_size": "6871 rows",
+      "license": "not declared in README/API; downstream claims unverified",
+      "commercial_use_status": "LEGAL_REVIEW_REQUIRED",
+      "redistribution_status": "unknown",
+      "research_only_status": false,
+      "confidence": "low",
+      "recommended_usage": "provenance investigation only; do not ingest",
+      "known_limitations": "examples strongly resemble Archana-derived corpus; original source and rights absent"
+    },
+    {
+      "dataset_name": "ELR-1000",
+      "provider": "Karya / community contributors",
+      "url": "https://github.com/karya-inc/elr-1000",
+      "version": "repository main, 2026-09-03 README; verify HF snapshot",
+      "data_types": [
+        "multilingual recipes",
+        "ingredients",
+        "recipe steps",
+        "images",
+        "audio",
+        "cultural context"
+      ],
+      "approximate_size": "1073 recipes; 10 languages",
+      "license": "KPL BY-NC-SA-FS 1.0",
+      "commercial_use_status": "RESEARCH_ONLY; commercial licensing by contact",
+      "redistribution_status": "noncommercial redistribution under same terms",
+      "research_only_status": true,
+      "confidence": "high",
+      "recommended_usage": "research benchmark and culturally grounded process data after gated access review",
+      "known_limitations": "variable quantities; software system GPL requirement; raw HF access requires token"
+    },
+    {
+      "dataset_name": "Sangat Food DB",
+      "provider": "Sangat",
+      "url": "https://github.com/akashthawaitcc/sangat-food-db",
+      "version": "main, initial scaffold 2026-05-20",
+      "data_types": [
+        "cooked-dish nutrition",
+        "portion metadata",
+        "ingredient summaries"
+      ],
+      "approximate_size": "seed exemplar; target ~200 dishes",
+      "license": "CC BY-SA 4.0 for data; MIT for tooling",
+      "commercial_use_status": "COMMERCIAL_SAFE_WITH_ATTRIBUTION_SHAREALIKE",
+      "redistribution_status": "allowed with attribution/share-alike",
+      "research_only_status": false,
+      "confidence": "high",
+      "recommended_usage": "commercial-safe nutrition/portion supplement, not full recipe corpus",
+      "known_limitations": "current scaffold lacks full instructions, recipe quantities, and broad multi-region coverage"
+    },
+    {
+      "dataset_name": "Indian Food 101",
+      "provider": "Kaggle compilation",
+      "url": "https://www.kaggle.com/datasets/nehaprabhavalkar/indian-food-101",
+      "version": "release-dependent",
+      "data_types": [
+        "dish labels",
+        "ingredients summary",
+        "region",
+        "time metadata"
+      ],
+      "approximate_size": "255 rows",
+      "license": "data files copyright original authors; not a clean license",
+      "commercial_use_status": "LEGAL_REVIEW_REQUIRED",
+      "redistribution_status": "unknown",
+      "research_only_status": false,
+      "confidence": "low",
+      "recommended_usage": "exclude from recipe corpus",
+      "known_limitations": "mixed Wikipedia/Hebbar's Kitchen/Archana sources; no full instructions"
+    }
+  ]
+}
