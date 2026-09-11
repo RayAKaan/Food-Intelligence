@@ -1,0 +1,11 @@
+{
+  "corpus_version": "INDIAN_FOOD_QUARANTINE_V1",
+  "status": "METADATA_ONLY",
+  "records": [
+    {"dataset":"EmTpro01/indian-recipe-cleaned","source_id":"EmTpro01","source_record_count":6871,"license_status":"UNCLEAR","admission_status":"QUARANTINED","raw_downloaded":false,"reason":"license and upstream provenance absent; examples resemble Archana-derived records"},
+    {"dataset":"INDoRI","source_id":"INDoRI","source_record_count":5187,"license_status":"LEGAL_REVIEW_REQUIRED","admission_status":"QUARANTINED","raw_downloaded":false,"reason":"web-derived from seven platforms; underlying rights unresolved"},
+    {"dataset":"Archana-derived datasets","source_id":"ARCHANA_DERIVED","source_record_count":"6000+","license_status":"LEGAL_REVIEW_REQUIRED","admission_status":"QUARANTINED","raw_downloaded":false,"reason":"downstream labels do not establish rights in source recipe text"},
+    {"dataset":"INDB ASC/BFP/OSR","source_id":"INDB","source_record_count":1014,"license_status":"SOURCE_SPECIFIC_REVIEW_REQUIRED","admission_status":"QUARANTINED","raw_downloaded":false,"reason":"cookbook and website source groups need separate rights review"}
+  ],
+  "raw_download_policy": "metadata and provenance analysis only until permission or defensible license is established"
+}
