@@ -146,9 +146,10 @@ def food_mvp_coupling(files: list[Path]) -> dict[str, int]:
 def build_report(root: Path) -> dict[str, Any]:
     area_files = {area: relative_files(root, area) for area in INVENTORY_DIRS}
     all_python = python_files(root)
-    imports, parse_errors = imported_roots(all_python)
+    _, parse_errors = imported_roots(all_python)
     source = root / "src/food_intelligence"
     source_files = sorted(source.glob("*.py")) if source.exists() else []
+    source_imports, _ = imported_roots(source_files)
     tests = root / "tests"
     test_files = sorted(tests.rglob("test_*.py")) if tests.exists() else []
     fixture_paths = sorted(
@@ -157,7 +158,7 @@ def build_report(root: Path) -> dict[str, Any]:
     )
     required_paths = {path: (root / path).exists() for path in REQUIRED_PATHS}
     third_party = sorted(
-        name for name in imports
+        name for name in source_imports
         if name not in sys.stdlib_module_names and name not in {"food_intelligence"}
     )
     pyproject = root / "pyproject.toml"
