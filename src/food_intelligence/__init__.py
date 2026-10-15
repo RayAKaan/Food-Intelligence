@@ -82,3 +82,12 @@ from .cross_contracts import (
     SchemaMigrationRegistry,
     validate_experiment_bundle,
 )
+
+# Deterministic, allowlisted world-state intervention execution.
+from .world_execution import (
+    InterventionEngine,
+    TransitionIssue,
+    TransitionStatus,
+    WorldTransition,
+    execute_intervention,
+)
