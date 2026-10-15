@@ -67,6 +67,9 @@ def test_normalization_uses_canonical_base_unit() -> None:
     assert normalized.unit == "kg"
     assert normalized.value == pytest.approx(0.001)
     assert unit_dimension("degC") == "temperature"
+    concentration = normalize_quantity(Quantity(1, "mol/L"))
+    assert concentration.unit == "mol/m3"
+    assert concentration.value == pytest.approx(1000)
 
 
 def test_unknown_units_and_non_finite_values_fail_closed() -> None:
