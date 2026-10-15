@@ -47,6 +47,8 @@ def test_process_id_adapter_uses_existing_process_normalization():
     assert canonical_process_id("shallow-fry") == "shallow_fry"
     with pytest.raises(ValueError, match="non-empty"):
         canonical_process_id("  ")
+    with pytest.raises(ValueError, match="unknown process"):
+        canonical_process_id("teleport")
 
 
 def test_legacy_source_provenance_preserves_source_record_and_parents():
