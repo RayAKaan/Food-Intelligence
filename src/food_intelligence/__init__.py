@@ -73,3 +73,12 @@ from .evidence_ledger import (
     EvidenceLink,
     EvidenceRelation,
 )
+
+# Cross-contract integrity checks and explicit schema migration policy.
+from .cross_contracts import (
+    ContractIssue,
+    ContractValidationReport,
+    IssueSeverity,
+    SchemaMigrationRegistry,
+    validate_experiment_bundle,
+)
