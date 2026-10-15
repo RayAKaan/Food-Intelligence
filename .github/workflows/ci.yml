@@ -30,7 +30,7 @@ jobs:
       - name: Compile source
         run: python -m compileall -q src
       - name: Run Phase 0 audit
-        run: python scripts/phase0_audit.py --output phase0-audit.json
+        run: python scripts/phase0_audit.py --strict --output phase0-audit.json
       - name: Run tests
         run: python -m pytest -q
       - name: CLI smoke tests
