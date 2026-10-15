@@ -41,3 +41,13 @@ from .world_contracts import (
     canonical_json,
     stable_id,
 )
+
+# Explicit adapters for reconciling legacy records with canonical contracts.
+from .contract_adapters import (
+    canonical_process_id,
+    canonical_state_id,
+    legacy_observation_to_contract,
+    legacy_provenance_to_evidence,
+    legacy_sensory_profile_to_observations,
+    preserve_entity_id,
+)

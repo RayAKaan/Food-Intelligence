@@ -21,6 +21,7 @@ class EvidenceClass(str, Enum):
     SIMULATED = "SIMULATED"
     INFERRED = "INFERRED"
     HYPOTHESIS = "HYPOTHESIS"
+    SYNTHETIC_FIXTURE = "SYNTHETIC_FIXTURE"
 
 
 class ExperimentStatus(str, Enum):
@@ -252,6 +253,7 @@ class EvidenceRecord:
     license_status: str | None = None
     parent_evidence_ids: tuple[str, ...] = ()
     limitations: tuple[str, ...] = ()
+    source_record_id: str | None = None
 
     def __post_init__(self) -> None:
         if not isinstance(self.evidence_class, EvidenceClass):
@@ -261,6 +263,8 @@ class EvidenceRecord:
         if self.evidence_class in {EvidenceClass.MEASURED, EvidenceClass.SOURCE_DERIVED}:
             if not self.source_id:
                 raise ValueError("measured/source-derived evidence requires source_id")
+        if self.evidence_class is EvidenceClass.MEASURED and not self.source_record_id:
+            raise ValueError("measured evidence requires source_record_id")
 
 
 @dataclass(frozen=True)
