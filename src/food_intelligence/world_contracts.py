@@ -222,6 +222,10 @@ class ExperimentalObservation:
     conditions: Mapping[str, Any] | None = None
 
     def __post_init__(self) -> None:
+        if not isinstance(self.status, ObservationStatus):
+            raise TypeError("status must be an ObservationStatus")
+        if not isinstance(self.evidence_class, EvidenceClass):
+            raise TypeError("evidence_class must be an EvidenceClass")
         for name in ("observation_id", "variable", "method"):
             if not getattr(self, name).strip():
                 raise ValueError(f"{name} must be non-empty")
@@ -250,6 +254,8 @@ class EvidenceRecord:
     limitations: tuple[str, ...] = ()
 
     def __post_init__(self) -> None:
+        if not isinstance(self.evidence_class, EvidenceClass):
+            raise TypeError("evidence_class must be an EvidenceClass")
         if not self.evidence_id.strip() or not self.description.strip():
             raise ValueError("evidence_id and description must be non-empty")
         if self.evidence_class in {EvidenceClass.MEASURED, EvidenceClass.SOURCE_DERIVED}:
@@ -273,6 +279,8 @@ class ExperimentRecord:
     failure_reason: str | None = None
 
     def __post_init__(self) -> None:
+        if not isinstance(self.status, ExperimentStatus):
+            raise TypeError("status must be an ExperimentStatus")
         for name in ("experiment_id", "protocol_id", "initial_state_id"):
             if not getattr(self, name).strip():
                 raise ValueError(f"{name} must be non-empty")
