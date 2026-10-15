@@ -167,3 +167,15 @@ def test_unknown_condition_is_not_used_as_a_default_in_sequence():
     assert report.status is ProtocolExecutionStatus.FAILED
     assert report.transitions[0].status is TransitionStatus.FAILED
     assert "PRECONDITION_UNKNOWN" in {issue.code for issue in report.issues}
+
+
+def test_protocol_execution_api_is_exported_from_package_root():
+    from food_intelligence import (
+        ProtocolExecutionReport,
+        ProtocolExecutionStatus as PublicProtocolExecutionStatus,
+        execute_protocol as public_execute_protocol,
+    )
+
+    assert ProtocolExecutionReport
+    assert PublicProtocolExecutionStatus is ProtocolExecutionStatus
+    assert public_execute_protocol is execute_protocol
