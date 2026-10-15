@@ -68,3 +68,10 @@ Phase 1 is complete when the domain entities and experimental lifecycle use one 
 ## Canonical roadmap execution note
 
 The 1A–1F labels in this document refer specifically to the canonical-contract roadmap. Some older repository documents named `phase1e-*` describe the earlier retrieval/reasoning prototype increment; those files are historical implementation notes and are not substitutes for this roadmap's cross-contract validation gate. The current 1E implementation and scope are documented in `docs/phase1-contract-invariants.md`.
+
+
+## Phase 1F exit-gate implementation
+
+The current exit-gate candidate adds `tests/test_phase1f_exit_gate.py`, `docs/phase1f-exit-gate.md`, and `docs/phase2-executable-world-proposal.md`. The integration test exercises the package-root public imports, a complete canonical experiment bundle, evidence-ledger audit, deterministic serialization and IDs, and preservation of unknown environmental values. CI on the PR head is still required before Phase 1 can be marked passed.
+
+Phase 1 completion is a software contract boundary only. It does not mean legacy runtime paths have all been migrated, that a dynamics engine exists, or that the current system has scientific predictive validity. The Phase 2 proposal defines the next scope: immutable state transitions and fail-closed intervention execution, without unsupported physics or automatic observation creation.
