@@ -84,3 +84,10 @@ Keep modules consolidated if the implementation is clearer without them; do not 
 ## Phase exit criteria
 
 Phase 2 is complete only when the state transition API is deterministic, immutable at the caller boundary, fully tested, explicit about unsupported physics, and integrated with the canonical contracts. This proves software execution semantics only. Validated food dynamics remains a separate subsequent phase requiring sourced parameters, operating ranges, and comparison with physical measurements.
+
+
+## Implementation progress (2026-10-15)
+
+- **Phase 2A merged:** deterministic single-intervention execution for the allowlisted `set_condition` bookkeeping operation.
+- **Phase 2B in progress:** sequential execution of the interventions declared in an `ExperimentProtocol`, with state chaining, deterministic replay, stop-on-first-failure semantics, and explicit partial-progress reporting.
+- Neither increment implements physical food dynamics or generates observations.
