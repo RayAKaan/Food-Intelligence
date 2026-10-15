@@ -66,6 +66,7 @@ _UNIT_ROWS = (
     ("kW", "power", 1e3, 0.0, "W"),
     ("mol", "amount_of_substance", 1.0, 0.0, "mol"),
     ("mmol", "amount_of_substance", 1e-3, 0.0, "mol"),
+    ("mol/m3", "amount_concentration", 1.0, 0.0, "mol/m3"),
     ("mol/L", "amount_concentration", 1e3, 0.0, "mol/m3"),
     ("mmol/L", "amount_concentration", 1.0, 0.0, "mol/m3"),
     ("kg/m3", "mass_concentration", 1.0, 0.0, "kg/m3"),
