@@ -63,7 +63,6 @@ def test_unknown_quantity_remains_unknown_after_unit_conversion() -> None:
 
 
 def test_normalization_uses_canonical_base_unit() -> None:
-    assert normalize_quantity(Quantity(1000, "mg")) == Quantity(1, "kg") if False else True
     normalized = normalize_quantity(Quantity(1000, "mg"))
     assert normalized.unit == "kg"
     assert normalized.value == pytest.approx(0.001)
