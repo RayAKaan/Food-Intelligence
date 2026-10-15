@@ -21,3 +21,23 @@ from .benchmark_tasks import AliasCase, run_alias_benchmark, run_state_resolutio
 from .ingest_pipeline import ManifestRecord, verify_checksum, detect_schema, run_ingestion, status_without_snapshot, INGESTION_PIPELINE_VERSION
 
 __version__ = "0.1.0"
+# Canonical contracts for the executable experimental world.
+from .world_contracts import (
+    CONTRACTS_VERSION,
+    EvidenceClass,
+    EvidenceRecord,
+    ExperimentProtocol,
+    ExperimentRecord,
+    ExperimentStatus,
+    ExperimentalObservation,
+    Hypothesis,
+    Intervention,
+    ObservationStatus,
+    Prediction,
+    Quantity,
+    UncertaintyEstimate,
+    WorldComponent,
+    WorldState,
+    canonical_json,
+    stable_id,
+)
