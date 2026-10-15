@@ -64,3 +64,12 @@ from .units import (
     unit_dimension,
 )
 from .measurement import MeasurementMetadata, convert_observation_unit
+
+# Provenance-aware evidence ledger; contradictions remain explicit and unresolved.
+from .evidence_ledger import (
+    EvidenceAudit,
+    EvidenceIssue,
+    EvidenceLedger,
+    EvidenceLink,
+    EvidenceRelation,
+)
