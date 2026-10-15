@@ -254,6 +254,11 @@ class EvidenceRecord:
     parent_evidence_ids: tuple[str, ...] = ()
     limitations: tuple[str, ...] = ()
     source_record_id: str | None = None
+    method: str | None = None
+    conditions: Mapping[str, Any] | None = None
+    observed_at: str | None = None
+    source_uri: str | None = None
+    content_hash: str | None = None
 
     def __post_init__(self) -> None:
         if not isinstance(self.evidence_class, EvidenceClass):
@@ -261,10 +266,15 @@ class EvidenceRecord:
         if not self.evidence_id.strip() or not self.description.strip():
             raise ValueError("evidence_id and description must be non-empty")
         if self.evidence_class in {EvidenceClass.MEASURED, EvidenceClass.SOURCE_DERIVED}:
-            if not self.source_id:
+            if not self.source_id or not self.source_id.strip():
                 raise ValueError("measured/source-derived evidence requires source_id")
         if self.evidence_class is EvidenceClass.MEASURED and not self.source_record_id:
             raise ValueError("measured evidence requires source_record_id")
+        for name in ("source_version", "license_status", "source_record_id", "method", "observed_at", "source_uri", "content_hash"):
+            value = getattr(self, name)
+            if value is not None and not value.strip():
+                raise ValueError(f"{name} must be non-empty when supplied")
+        object.__setattr__(self, "conditions", dict(self.conditions or {}))
 
 
 @dataclass(frozen=True)
