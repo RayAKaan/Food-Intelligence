@@ -263,6 +263,8 @@ class EvidenceRecord:
         if self.evidence_class in {EvidenceClass.MEASURED, EvidenceClass.SOURCE_DERIVED}:
             if not self.source_id:
                 raise ValueError("measured/source-derived evidence requires source_id")
+        if self.evidence_class is EvidenceClass.MEASURED and not self.source_record_id:
+            raise ValueError("measured evidence requires source_record_id")
 
 
 @dataclass(frozen=True)
