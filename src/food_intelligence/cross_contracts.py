@@ -171,13 +171,19 @@ def validate_experiment_bundle(
                 continue
             try:
                 assert_compatible_units(prediction.unit, observation.unit)
-            except ValueError:
+            except ValueError as exc:
+                if str(exc).startswith("unsupported unit:"):
+                    code = "PREDICTION_OBSERVATION_UNIT_UNSUPPORTED"
+                    message = str(exc)
+                else:
+                    code = "PREDICTION_OBSERVATION_UNIT_MISMATCH"
+                    message = (
+                        f"prediction unit {prediction.unit!r} and observation unit "
+                        f"{observation.unit!r} are dimensionally incompatible for "
+                        f"{observation.variable!r}"
+                    )
                 issues.append(ContractIssue(
-                    "PREDICTION_OBSERVATION_UNIT_MISMATCH", IssueSeverity.ERROR,
-                    f"prediction unit {prediction.unit!r} and observation unit "
-                    f"{observation.unit!r} are dimensionally incompatible for "
-                    f"{observation.variable!r}",
-                    experiment.experiment_id,
+                    code, IssueSeverity.ERROR, message, experiment.experiment_id,
                 ))
 
         if observation.status is ObservationStatus.OBSERVED and observation.value is None:
