@@ -64,3 +64,7 @@ The 1A contracts are deliberately dependency-light and do not run equations, mut
 ## Phase 1 exit criteria
 
 Phase 1 is complete when the domain entities and experimental lifecycle use one canonical, versioned contract system; existing representations have explicit adapters; invariants are tested; provenance and uncertainty survive round trips; and the contract boundary is ready for the Phase 2 executable world state. A passing test suite proves software behavior, not scientific validity.
+
+## Canonical roadmap execution note
+
+The 1A–1F labels in this document refer specifically to the canonical-contract roadmap. Some older repository documents named `phase1e-*` describe the earlier retrieval/reasoning prototype increment; those files are historical implementation notes and are not substitutes for this roadmap's cross-contract validation gate. The current 1E implementation and scope are documented in `docs/phase1-contract-invariants.md`.
