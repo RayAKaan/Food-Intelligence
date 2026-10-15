@@ -147,6 +147,7 @@ def build_report(root: Path) -> dict[str, Any]:
     area_files = {area: relative_files(root, area) for area in INVENTORY_DIRS}
     all_python = python_files(root)
     _, parse_errors = imported_roots(all_python)
+    parse_errors = [Path(path).relative_to(root).as_posix() for path in parse_errors]
     source = root / "src/food_intelligence"
     source_files = sorted(source.glob("*.py")) if source.exists() else []
     source_imports, _ = imported_roots(source_files)
