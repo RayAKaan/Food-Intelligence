@@ -257,3 +257,22 @@ def test_schema_registry_rejects_blank_versions_and_invalid_migrations() -> None
         registry.register("1", "1", lambda data: data)
     with pytest.raises(TypeError, match="callable"):
         registry.register("1", "2", None)
+
+def test_unsupported_units_have_a_distinct_error_code() -> None:
+    experiment = base_experiment(
+        predictions=(Prediction("p1", "aroma_signal", 0.4, "olf", "model", "1"),),
+        observations=(
+            ExperimentalObservation(
+                "o1", "aroma_signal", 0.35, "relative", ObservationStatus.OBSERVED,
+                EvidenceClass.SIMULATED, "simulator",
+            ),
+        ),
+    )
+    report = validate_experiment_bundle(
+        experiment,
+        protocols={"protocol-1": base_protocol()},
+        world_states={"state-1": base_state()},
+    )
+    assert "PREDICTION_OBSERVATION_UNIT_UNSUPPORTED" in {
+        x.code for x in report.errors
+    }
