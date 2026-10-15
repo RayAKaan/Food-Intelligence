@@ -51,3 +51,16 @@ from .contract_adapters import (
     legacy_sensory_profile_to_observations,
     preserve_entity_id,
 )
+
+# Dimensional units and measurement metadata for experimental values.
+from .units import (
+    UnitDefinition,
+    UNIT_REGISTRY,
+    assert_compatible_units,
+    convert_quantity,
+    convert_value,
+    normalize_quantity,
+    unit_definition,
+    unit_dimension,
+)
+from .measurement import MeasurementMetadata, convert_observation_unit
