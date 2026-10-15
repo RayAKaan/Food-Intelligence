@@ -6,7 +6,7 @@ information for a faithful conversion. They never infer a scientific result.
 from __future__ import annotations
 
 from .representation import Observation, Provenance, SensoryProfile
-from .transformations import normalize_process
+from .transformations import PROCESS_VOCABULARY, normalize_process
 from .world_contracts import (
     EvidenceClass,
     EvidenceRecord,
@@ -55,7 +55,10 @@ def canonical_process_id(legacy_process_id: str) -> str:
     """Use the process vocabulary's normalization without inventing a process."""
     if not legacy_process_id or not legacy_process_id.strip():
         raise ValueError("process ID must be non-empty")
-    return normalize_process(legacy_process_id)
+    process_id = normalize_process(legacy_process_id)
+    if process_id not in PROCESS_VOCABULARY:
+        raise ValueError(f"unknown process ID: {legacy_process_id}")
+    return process_id
 
 
 def legacy_provenance_to_evidence(provenance: Provenance) -> EvidenceRecord:
