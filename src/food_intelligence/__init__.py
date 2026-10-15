@@ -91,3 +91,11 @@ from .world_execution import (
     WorldTransition,
     execute_intervention,
 )
+
+
+# Sequential protocol orchestration over deterministic world transitions.
+from .protocol_execution import (
+    ProtocolExecutionReport,
+    ProtocolExecutionStatus,
+    execute_protocol,
+)
