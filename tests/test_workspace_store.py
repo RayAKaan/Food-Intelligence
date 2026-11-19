@@ -1,5 +1,3 @@
-import json
-
 import pytest
 
 from food_intelligence.workspace_store import WorkspaceNotFound, WorkspaceStore
@@ -56,11 +54,22 @@ def test_duplicate_save_is_idempotent_but_conflicting_content_is_rejected(tmp_pa
         store.save_brief(project["project_id"], {**brief, "title": "different"})
 
 
+def test_same_deterministic_brief_can_belong_to_two_projects(tmp_path):
+    store = WorkspaceStore(tmp_path / "db.sqlite3")
+    first = store.create_project("First")
+    second = store.create_project("Second")
+    brief = {"brief_id": "same-id", "status": "DRAFT_ONLY", "scientific_execution": "NOT_RUN"}
+    store.save_brief(first["project_id"], brief)
+    store.save_brief(second["project_id"], brief)
+    assert store.list_briefs(first["project_id"]) == [brief]
+    assert store.list_briefs(second["project_id"]) == [brief]
+
+
 def test_projects_have_deterministic_ordering_for_equal_timestamps(tmp_path):
     store = WorkspaceStore(tmp_path / "db.sqlite3")
     first = store.create_project("First")
     second = store.create_project("Second")
-    with store._connect() as db:
-        db.execute("UPDATE projects SET updated_at = 'same' ")
+    with store._connection() as db:
+        db.execute("UPDATE projects SET updated_at = 'same'")
     ids = [item["project_id"] for item in store.list_projects()]
     assert ids == sorted([first["project_id"], second["project_id"]])
