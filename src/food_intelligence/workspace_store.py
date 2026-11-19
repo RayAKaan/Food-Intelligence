@@ -60,14 +60,14 @@ class WorkspaceStore:
                     updated_at TEXT NOT NULL
                 );
                 CREATE TABLE IF NOT EXISTS research_briefs (
-                    brief_id TEXT PRIMARY KEY,
                     project_id TEXT NOT NULL REFERENCES projects(project_id) ON DELETE CASCADE,
+                    brief_id TEXT NOT NULL,
                     title TEXT NOT NULL,
                     status TEXT NOT NULL CHECK(status = 'DRAFT_ONLY'),
                     scientific_execution TEXT NOT NULL CHECK(scientific_execution = 'NOT_RUN'),
                     payload_json TEXT NOT NULL,
                     created_at TEXT NOT NULL,
-                    UNIQUE(project_id, brief_id)
+                    PRIMARY KEY(project_id, brief_id)
                 );
                 CREATE INDEX IF NOT EXISTS idx_projects_updated ON projects(updated_at DESC, project_id ASC);
                 CREATE INDEX IF NOT EXISTS idx_briefs_project ON research_briefs(project_id, created_at ASC, brief_id ASC);
@@ -132,9 +132,9 @@ class WorkspaceStore:
                 return json.loads(existing["payload_json"])
             db.execute("""
                 INSERT INTO research_briefs
-                (brief_id, project_id, title, status, scientific_execution, payload_json, created_at)
+                (project_id, brief_id, title, status, scientific_execution, payload_json, created_at)
                 VALUES (?, ?, ?, 'DRAFT_ONLY', 'NOT_RUN', ?, ?)
-            """, (brief_id, project_id, str(brief.get("title", "Research brief"))[:120], payload, now))
+            """, (project_id, brief_id, str(brief.get("title", "Research brief"))[:120], payload, now))
             db.execute("UPDATE projects SET updated_at = ? WHERE project_id = ?", (now, project_id))
         return json.loads(payload)
 
