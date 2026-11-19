@@ -1,15 +1,13 @@
-"""SQLite-backed persistence for Digital Kitchen projects and research briefs.
-
-Stored briefs remain drafts. Persistence is not evidence of scientific execution.
-"""
+"""SQLite-backed persistence for Digital Kitchen projects and research briefs."""
 from __future__ import annotations
 
 import json
 import os
 import sqlite3
 import uuid
+from contextlib import contextmanager
 from pathlib import Path
-from typing import Any
+from typing import Any, Iterator
 
 SCHEMA_VERSION = 1
 
@@ -21,9 +19,7 @@ class WorkspaceNotFound(LookupError):
 class WorkspaceStore:
     def __init__(self, database_path: str | Path | None = None) -> None:
         configured = database_path or os.environ.get("FOOD_INTELLIGENCE_DB")
-        self.database_path = Path(configured) if configured else (
-            Path.home() / ".food-intelligence" / "workspace.sqlite3"
-        )
+        self.database_path = Path(configured) if configured else Path.home() / ".food-intelligence" / "workspace.sqlite3"
         if str(self.database_path) != ":memory:":
             self.database_path.parent.mkdir(parents=True, exist_ok=True)
         self._initialize()
@@ -34,14 +30,22 @@ class WorkspaceStore:
         connection.execute("PRAGMA foreign_keys = ON")
         return connection
 
+    @contextmanager
+    def _connection(self) -> Iterator[sqlite3.Connection]:
+        connection = self._connect()
+        try:
+            yield connection
+            connection.commit()
+        except Exception:
+            connection.rollback()
+            raise
+        finally:
+            connection.close()
+
     def _initialize(self) -> None:
-        with self._connect() as db:
+        with self._connection() as db:
             db.execute("PRAGMA journal_mode = WAL")
-            db.execute("""
-                CREATE TABLE IF NOT EXISTS workspace_schema (
-                    version INTEGER NOT NULL
-                )
-            """)
+            db.execute("CREATE TABLE IF NOT EXISTS workspace_schema (version INTEGER NOT NULL)")
             row = db.execute("SELECT version FROM workspace_schema LIMIT 1").fetchone()
             if row is None:
                 db.execute("INSERT INTO workspace_schema(version) VALUES (?)", (SCHEMA_VERSION,))
@@ -65,10 +69,8 @@ class WorkspaceStore:
                     created_at TEXT NOT NULL,
                     UNIQUE(project_id, brief_id)
                 );
-                CREATE INDEX IF NOT EXISTS idx_projects_updated
-                    ON projects(updated_at DESC, project_id ASC);
-                CREATE INDEX IF NOT EXISTS idx_briefs_project
-                    ON research_briefs(project_id, created_at ASC, brief_id ASC);
+                CREATE INDEX IF NOT EXISTS idx_projects_updated ON projects(updated_at DESC, project_id ASC);
+                CREATE INDEX IF NOT EXISTS idx_briefs_project ON research_briefs(project_id, created_at ASC, brief_id ASC);
             """)
 
     @staticmethod
@@ -77,23 +79,19 @@ class WorkspaceStore:
         return datetime.now(timezone.utc).isoformat(timespec="seconds")
 
     def create_project(self, name: str, description: str = "") -> dict[str, Any]:
-        clean_name = name.strip()
-        clean_description = description.strip()
+        clean_name, clean_description = name.strip(), description.strip()
         if not clean_name or len(clean_name) > 120:
             raise ValueError("Project name must be 1–120 characters.")
         if len(clean_description) > 2_000:
             raise ValueError("Project description must be at most 2,000 characters.")
-        now = self._now()
-        project_id = "project_" + uuid.uuid4().hex
-        with self._connect() as db:
-            db.execute(
-                "INSERT INTO projects VALUES (?, ?, ?, ?, ?)",
-                (project_id, clean_name, clean_description, now, now),
-            )
+        now, project_id = self._now(), "project_" + uuid.uuid4().hex
+        with self._connection() as db:
+            db.execute("INSERT INTO projects VALUES (?, ?, ?, ?, ?)",
+                       (project_id, clean_name, clean_description, now, now))
         return self.get_project(project_id)
 
     def list_projects(self) -> list[dict[str, Any]]:
-        with self._connect() as db:
+        with self._connection() as db:
             rows = db.execute("""
                 SELECT p.*, COUNT(b.brief_id) AS brief_count
                 FROM projects p LEFT JOIN research_briefs b USING(project_id)
@@ -103,12 +101,11 @@ class WorkspaceStore:
         return [dict(row) for row in rows]
 
     def get_project(self, project_id: str) -> dict[str, Any]:
-        with self._connect() as db:
+        with self._connection() as db:
             row = db.execute("""
                 SELECT p.*, COUNT(b.brief_id) AS brief_count
                 FROM projects p LEFT JOIN research_briefs b USING(project_id)
-                WHERE p.project_id = ?
-                GROUP BY p.project_id
+                WHERE p.project_id = ? GROUP BY p.project_id
             """, (project_id,)).fetchone()
         if row is None:
             raise WorkspaceNotFound("Project not found.")
@@ -122,11 +119,8 @@ class WorkspaceStore:
             raise ValueError("Brief is missing its identifier.")
         payload = json.dumps(brief, ensure_ascii=False, sort_keys=True, separators=(",", ":"))
         now = self._now()
-        with self._connect() as db:
-            project = db.execute(
-                "SELECT 1 FROM projects WHERE project_id = ?", (project_id,)
-            ).fetchone()
-            if project is None:
+        with self._connection() as db:
+            if db.execute("SELECT 1 FROM projects WHERE project_id = ?", (project_id,)).fetchone() is None:
                 raise WorkspaceNotFound("Project not found.")
             existing = db.execute(
                 "SELECT payload_json FROM research_briefs WHERE project_id = ? AND brief_id = ?",
@@ -145,9 +139,8 @@ class WorkspaceStore:
         return json.loads(payload)
 
     def list_briefs(self, project_id: str) -> list[dict[str, Any]]:
-        with self._connect() as db:
-            exists = db.execute("SELECT 1 FROM projects WHERE project_id = ?", (project_id,)).fetchone()
-            if exists is None:
+        with self._connection() as db:
+            if db.execute("SELECT 1 FROM projects WHERE project_id = ?", (project_id,)).fetchone() is None:
                 raise WorkspaceNotFound("Project not found.")
             rows = db.execute("""
                 SELECT payload_json FROM research_briefs
