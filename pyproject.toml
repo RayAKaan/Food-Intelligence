@@ -13,6 +13,7 @@ keywords = ["food", "computational-gastronomy", "ontology", "retrieval", "resear
 
 [project.scripts]
 food = "food_intelligence.cli:main"
+food-api = "food_intelligence.research_api:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]

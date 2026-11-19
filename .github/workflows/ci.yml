@@ -2,7 +2,7 @@ name: Food Intelligence CI
 
 on:
   push:
-    branches: ["main", "phase*/*"]
+    branches: ["main", "phase*/*", "product*/*"]
   pull_request:
     branches: ["main"]
 
