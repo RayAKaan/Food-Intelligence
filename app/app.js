@@ -3,6 +3,7 @@ const addRow = document.querySelector("#addIngredientRow");
 const ingredientInput = document.querySelector("#ingredientInput");
 const toast = document.querySelector("#toast");
 const briefDialog = document.querySelector("#briefDialog");
+const prepareButton = document.querySelector("#prepareBrief");
 let toastTimer;
 
 function notify(message) {
@@ -59,7 +60,6 @@ function addIngredient() {
   remove.type = "button";
   remove.setAttribute("aria-label", `Remove ${name}`);
   remove.textContent = "×";
-  remove.addEventListener("click", () => card.remove());
   card.append(visual, info, amount, remove);
   ingredientGrid.append(card);
   ingredientInput.value = "";
@@ -76,17 +76,78 @@ ingredientGrid.addEventListener("click", (event) => {
   if (button) button.closest(".ingredient-card").remove();
 });
 
-document.querySelector("#prepareBrief").addEventListener("click", () => {
-  const prompt = document.querySelector("#researchPrompt").value.trim();
-  const ingredients = [...ingredientGrid.querySelectorAll(".ingredient-info strong")].map((node) => node.textContent);
-  if (!prompt && ingredients.length === 0) {
+function collectBriefInput() {
+  const ingredients = [...ingredientGrid.querySelectorAll(".ingredient-card")].map((card) => ({
+    name: card.querySelector(".ingredient-info strong")?.textContent?.trim() || "",
+    amount: card.querySelector(".ingredient-amount")?.textContent?.trim() || null,
+  }));
+  return {
+    prompt: document.querySelector("#researchPrompt").value.trim(),
+    ingredients,
+    direction: {
+      experience: "Creamy centre, delicate crunch",
+      flavour: "Deep cacao, warm spice",
+      time: "Under 30 minutes",
+    },
+  };
+}
+
+function renderResearchBrief(brief) {
+  document.querySelector("#briefIngredients").textContent = brief.ingredients
+    .map((item) => item.amount && item.amount !== "—" ? `${item.name} (${item.amount})` : item.name)
+    .join(" · ") || "No ingredients specified yet.";
+  document.querySelector("#briefDescription").textContent = brief.prompt || "No additional creative direction supplied.";
+  document.querySelector("#briefTitle").textContent = brief.title || "A new formulation to investigate";
+
+  const intro = document.querySelector(".dialog-intro");
+  intro.textContent = `Draft ${brief.brief_id}. This is a structured research brief, not a simulation result.`;
+
+  const list = document.querySelector(".brief-block ul");
+  list.replaceChildren();
+  brief.research_questions.forEach((question) => {
+    const item = document.createElement("li");
+    item.textContent = question;
+    list.append(item);
+  });
+
+  const limitations = document.querySelector("#briefLimitations");
+  if (limitations) limitations.remove();
+  const block = document.createElement("div");
+  block.className = "brief-block";
+  block.id = "briefLimitations";
+  const label = document.createElement("span");
+  label.textContent = "CURRENT CAPABILITY BOUNDARY";
+  const text = document.createElement("p");
+  text.textContent = brief.limitations.join(" ");
+  block.append(label, text);
+  document.querySelector(".dialog-actions").before(block);
+}
+
+prepareButton.addEventListener("click", async () => {
+  const payload = collectBriefInput();
+  if (!payload.prompt && payload.ingredients.length === 0) {
     notify("Add an ingredient or describe your idea first.");
     return;
   }
-  document.querySelector("#briefIngredients").textContent = ingredients.join(" · ") || "No ingredients specified yet.";
-  document.querySelector("#briefDescription").textContent = prompt || "No additional creative direction supplied.";
-  document.querySelector("#briefTitle").textContent = prompt ? "Your creation, framed as a research question" : "A new formulation to investigate";
-  briefDialog.showModal();
+
+  prepareButton.disabled = true;
+  prepareButton.textContent = "Structuring brief…";
+  try {
+    const response = await fetch("/api/research-brief", {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify(payload),
+    });
+    const result = await response.json();
+    if (!response.ok) throw new Error(result.message || "Could not prepare the research brief.");
+    renderResearchBrief(result);
+    briefDialog.showModal();
+  } catch (error) {
+    notify(error.message || "The research API is unavailable. Start the local application server and try again.");
+  } finally {
+    prepareButton.disabled = false;
+    prepareButton.innerHTML = 'Prepare research brief <span>↗</span>';
+  }
 });
 
 document.querySelector(".dialog-close").addEventListener("click", () => briefDialog.close());
@@ -97,7 +158,7 @@ document.querySelector("#shareButton").addEventListener("click", async () => {
       await navigator.clipboard.writeText(url);
       notify("Workspace link copied.");
     } else {
-      notify("Open this prototype locally; sharing is not connected yet.");
+      notify("Sharing is not connected yet.");
     }
   } catch {
     notify("Sharing is not connected in this prototype.");
