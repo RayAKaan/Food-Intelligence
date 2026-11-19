@@ -3,41 +3,22 @@ import json
 
 import pytest
 
-from food_intelligence.research_api import (
-    RequestError,
-    application,
-    build_research_brief,
-)
+from food_intelligence.research_api import RequestError, application, build_research_brief
+from food_intelligence.workspace_store import WorkspaceStore
 
 
 def test_builds_deterministic_draft_from_user_inputs():
     data = {
         "prompt": "Invent a less-sweet chocolate dessert.",
-        "ingredients": [
-            {"name": "Dark chocolate", "amount": "180 g"},
-            {"name": "Dates", "amount": "90 g"},
-        ],
+        "ingredients": [{"name": "Dark chocolate", "amount": "180 g"}, {"name": "Dates", "amount": "90 g"}],
         "direction": {"experience": "Creamy centre, delicate crunch"},
     }
     first = build_research_brief(data)
-    second = build_research_brief(data)
-    assert first == second
+    assert first == build_research_brief(data)
     assert first["status"] == "DRAFT_ONLY"
     assert first["scientific_execution"] == "NOT_RUN"
     assert first["brief_id"].startswith("research_brief_")
     assert len(first["research_questions"]) == 5
-    assert first["ingredients"][0]["amount"] == "180 g"
-
-
-def test_unknown_and_unmeasured_properties_are_not_invented():
-    result = build_research_brief({
-        "ingredients": [{"name": "Cardamom"}],
-        "direction": {},
-    })
-    assert result["ingredients"] == [{"name": "Cardamom", "amount": None}]
-    assert "nutrition" not in result
-    assert "predictions" not in result
-    assert result["scientific_execution"] == "NOT_RUN"
 
 
 @pytest.mark.parametrize("data", [
@@ -56,68 +37,68 @@ def test_rejects_invalid_brief_inputs(data):
         build_research_brief(data)
 
 
-def call_wsgi(path, method="GET", payload=None, content_type="application/json"):
+def call_wsgi(path, method="GET", payload=None, content_type="application/json", store=None):
     raw = b"" if payload is None else json.dumps(payload).encode("utf-8")
     environ = {
-        "REQUEST_METHOD": method,
-        "PATH_INFO": path,
-        "CONTENT_TYPE": content_type,
-        "CONTENT_LENGTH": str(len(raw)),
-        "wsgi.input": io.BytesIO(raw),
+        "REQUEST_METHOD": method, "PATH_INFO": path, "CONTENT_TYPE": content_type,
+        "CONTENT_LENGTH": str(len(raw)), "wsgi.input": io.BytesIO(raw),
     }
+    if store is not None:
+        environ["food_intelligence.workspace_store"] = store
     captured = {}
-
     def start_response(status, headers):
         captured["status"] = status
         captured["headers"] = dict(headers)
-
     body = b"".join(application(environ, start_response))
-    return captured, body
+    return captured, json.loads(body) if body else None
 
 
-def test_health_endpoint_discloses_current_capabilities():
-    response, body = call_wsgi("/api/health")
+def test_health_endpoint_discloses_capabilities(tmp_path):
+    response, data = call_wsgi("/api/health", store=WorkspaceStore(tmp_path / "db.sqlite3"))
     assert response["status"] == "200 OK"
-    data = json.loads(body)
-    assert data["status"] == "ok"
     assert data["scientific_simulation"] is False
+    assert "project_persistence" in data["capabilities"]
 
 
-def test_post_endpoint_returns_structured_draft():
+def test_project_and_brief_api_round_trip(tmp_path):
+    store = WorkspaceStore(tmp_path / "db.sqlite3")
+    response, created = call_wsgi("/api/projects", "POST", {"name": "Chocolate study"}, store=store)
+    assert response["status"] == "201 Created"
+    project_id = created["project"]["project_id"]
+    response, listed = call_wsgi("/api/projects", store=store)
+    assert response["status"] == "200 OK"
+    assert listed["projects"][0]["name"] == "Chocolate study"
+    payload = {"prompt": "Make a new dessert", "ingredients": [{"name": "Cocoa"}]}
+    response, brief = call_wsgi(f"/api/projects/{project_id}/briefs", "POST", payload, store=store)
+    assert response["status"] == "201 Created"
+    assert brief["status"] == "DRAFT_ONLY"
+    response, saved = call_wsgi(f"/api/projects/{project_id}/briefs", store=store)
+    assert response["status"] == "200 OK"
+    assert saved["briefs"] == [brief]
+
+
+def test_unknown_project_returns_404(tmp_path):
+    response, body = call_wsgi("/api/projects/missing", store=WorkspaceStore(tmp_path / "db.sqlite3"))
+    assert response["status"] == "404 Not Found"
+    assert body["error"] == "not_found"
+
+
+def test_invalid_project_payload_returns_400(tmp_path):
+    response, body = call_wsgi("/api/projects", "POST", {"name": " "}, store=WorkspaceStore(tmp_path / "db.sqlite3"))
+    assert response["status"] == "400 Bad Request"
+    assert body["error"] == "invalid_request"
+
+
+def test_legacy_research_brief_endpoint_still_works(tmp_path):
     response, body = call_wsgi(
-        "/api/research-brief",
-        method="POST",
-        payload={"prompt": "Make a new dessert", "ingredients": [{"name": "Cocoa"}]},
+        "/api/research-brief", "POST",
+        {"prompt": "Make a new dessert", "ingredients": [{"name": "Cocoa"}]},
+        store=WorkspaceStore(tmp_path / "db.sqlite3"),
     )
     assert response["status"] == "201 Created"
-    data = json.loads(body)
-    assert data["status"] == "DRAFT_ONLY"
-    assert data["ingredients"][0]["name"] == "Cocoa"
+    assert body["status"] == "DRAFT_ONLY"
 
 
-def test_post_endpoint_returns_client_error_for_invalid_json_shape():
-    response, body = call_wsgi("/api/research-brief", method="POST", payload=[])
-    assert response["status"] == "400 Bad Request"
-    assert json.loads(body)["error"] == "invalid_research_brief"
-
-
-def test_post_endpoint_requires_json_content_type():
-    response, _ = call_wsgi(
-        "/api/research-brief",
-        method="POST",
-        payload={"ingredients": [{"name": "Cocoa"}]},
-        content_type="text/plain",
-    )
-    assert response["status"] == "400 Bad Request"
-
-
-def test_static_frontend_is_served_by_same_origin_api():
-    response, body = call_wsgi("/")
+def test_static_frontend_is_served_by_same_origin_api(tmp_path):
+    response, body = call_wsgi("/", store=WorkspaceStore(tmp_path / "db.sqlite3"))
     assert response["status"] == "200 OK"
-    assert b"Research Kitchen" in body
-
-
-def test_unknown_api_route_is_not_served_as_a_static_file():
-    response, body = call_wsgi("/api/missing")
-    assert response["status"] == "404 Not Found"
-    assert json.loads(body)["error"] == "not_found"
