@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f3f0e8">
+  <meta name="description" content="Food Intelligence — an AI-native workspace for culinary research and experimentation.">
+  <title>Food Intelligence — Research Kitchen</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="brand" href="#" aria-label="Food Intelligence home">
+        <span class="brand-mark"><span></span><span></span><span></span></span>
+        <span class="brand-copy"><strong>food intelligence</strong><small>RESEARCH KITCHEN</small></span>
+      </a>
+      <div class="workspace-switch"><span class="workspace-dot"></span><span>Personal laboratory</span><span class="chevron">⌄</span></div>
+      <div class="nav-label">WORKSPACE</div>
+      <nav class="primary-nav" aria-label="Main navigation">
+        <button class="nav-item active" data-view="Workbench"><span class="nav-icon">⌘</span>Workbench</button>
+        <button class="nav-item" data-view="Experiments"><span class="nav-icon">◷</span>Experiments<span class="nav-count">03</span></button>
+        <button class="nav-item" data-view="Ingredients"><span class="nav-icon">◈</span>Ingredients</button>
+        <button class="nav-item" data-view="Research library"><span class="nav-icon">▤</span>Research library</button>
+        <button class="nav-item" data-view="Insights"><span class="nav-icon">⌁</span>Insights</button>
+      </nav>
+      <div class="nav-label projects-label">YOUR PROJECTS <button class="tiny-plus" id="newProject" aria-label="New project">+</button></div>
+      <div class="project-list">
+        <button class="project-item selected"><span class="project-swatch copper"></span>Chocolate, reimagined</button>
+        <button class="project-item"><span class="project-swatch green"></span>Fermentation studies</button>
+        <button class="project-item"><span class="project-swatch yellow"></span>Plant-based textures</button>
+      </div>
+      <div class="sidebar-bottom">
+        <div class="system-status"><span class="status-pulse"></span><span>Workspace ready</span><span class="status-version">v0.1</span></div>
+        <button class="profile"><span class="avatar">R</span><span><strong>Researcher</strong><small>Personal workspace</small></span><span class="chevron">⌄</span></button>
+      </div>
+    </aside>
+
+    <main class="main-area">
+      <header class="topbar">
+        <div class="breadcrumbs"><span>Projects</span><span class="crumb-slash">/</span><strong>Chocolate, reimagined</strong></div>
+        <div class="topbar-actions"><span class="saved-label"><span class="saved-dot"></span>All changes saved</span><button class="icon-button" aria-label="Notifications">♧</button><button class="share-button" id="shareButton">Share workspace ↗</button></div>
+      </header>
+
+      <section class="workbench">
+        <div class="page-heading">
+          <div><div class="eyebrow"><span class="eyebrow-line"></span>YOUR RESEARCH BENCH <span class="eyebrow-index">01 / 04</span></div><h1>Let's make something<br><em>unexpected.</em></h1><p class="intro">A space to question ingredients, explore possibilities, and develop something that hasn't been made before.</p></div>
+          <div class="date-stamp"><span class="stamp-label">LAB NOTE</span><strong>№ 024</strong><span>NEW FORMULATION</span></div>
+        </div>
+
+        <div class="bench-toolbar"><div class="section-heading"><span class="section-number">01</span><h2>The ingredients</h2><span class="section-meta">4 components</span></div><button class="text-button" id="addIngredientToggle">＋ Add ingredient</button></div>
+        <div class="ingredient-grid" id="ingredientGrid">
+          <article class="ingredient-card"><div class="ingredient-visual cacao"><span class="ingredient-glyph">c</span></div><div class="ingredient-info"><strong>Dark chocolate</strong><span>Primary · 70% cacao</span></div><span class="ingredient-amount">180 <small>g</small></span><button class="remove-ingredient" aria-label="Remove dark chocolate">×</button></article>
+          <article class="ingredient-card"><div class="ingredient-visual date"><span class="ingredient-glyph">d</span></div><div class="ingredient-info"><strong>Medjool dates</strong><span>Sweetener · dried fruit</span></div><span class="ingredient-amount">90 <small>g</small></span><button class="remove-ingredient" aria-label="Remove dates">×</button></article>
+          <article class="ingredient-card"><div class="ingredient-visual cardamom"><span class="ingredient-glyph">✳</span></div><div class="ingredient-info"><strong>Green cardamom</strong><span>Aromatic · spice</span></div><span class="ingredient-amount">2 <small>pods</small></span><button class="remove-ingredient" aria-label="Remove cardamom">×</button></article>
+          <article class="ingredient-card"><div class="ingredient-visual almond"><span class="ingredient-glyph">a</span></div><div class="ingredient-info"><strong>Almonds</strong><span>Texture · nut</span></div><span class="ingredient-amount">35 <small>g</small></span><button class="remove-ingredient" aria-label="Remove almonds">×</button></article>
+        </div>
+        <div class="add-ingredient-row" id="addIngredientRow" hidden><input id="ingredientInput" type="text" placeholder="Ingredient name…" aria-label="Ingredient name"><button id="confirmIngredient">Add to bench</button><button class="cancel-add" id="cancelIngredient" aria-label="Cancel">×</button></div>
+
+        <div class="bench-divider"></div>
+        <div class="section-heading process-heading"><span class="section-number">02</span><h2>How do you imagine it?</h2><span class="section-meta">Your creative direction</span></div>
+        <div class="direction-grid">
+          <div class="direction-card"><span class="direction-icon">◌</span><div><span class="field-label">DESIRED EXPERIENCE</span><strong>Creamy centre, delicate crunch</strong></div><span class="edit-mark">↗</span></div>
+          <div class="direction-card"><span class="direction-icon">⌁</span><div><span class="field-label">FLAVOUR DIRECTION</span><strong>Deep cacao, warm spice</strong></div><span class="edit-mark">↗</span></div>
+          <div class="direction-card"><span class="direction-icon">◷</span><div><span class="field-label">AVAILABLE TIME</span><strong>Under 30 minutes</strong></div><span class="edit-mark">↗</span></div>
+        </div>
+
+        <div class="prompt-panel">
+          <div class="prompt-topline"><span class="prompt-spark">✳</span><span>YOUR RESEARCH BRIEF</span><span class="prompt-hint">Describe the creation in your own words</span></div>
+          <textarea id="researchPrompt" rows="3" placeholder="I want to create a new kind of chocolate dessert. It should feel indulgent but not too sweet, with a soft centre and a surprising texture…"></textarea>
+          <div class="prompt-footer"><span class="privacy-note">Your brief becomes the starting point for a structured experiment.</span><button id="prepareBrief" class="primary-button">Prepare research brief <span>↗</span></button></div>
+        </div>
+
+        <div class="bottom-note"><span class="note-mark">i</span><span>This workspace is an early product prototype. Research briefs can be drafted here; scientific simulations are not connected yet.</span></div>
+      </section>
+    </main>
+
+    <aside class="researcher-panel">
+      <div class="researcher-header"><div><span class="panel-kicker">YOUR AI COLLABORATOR</span><h2>The Researcher</h2></div><button class="more-button" aria-label="More options">···</button></div>
+      <div class="researcher-presence"><div class="presence-orbit"><div class="orbit-ring"></div><div class="orbit-core">✳</div><span class="orbit-dot"></span></div><div><strong>Ready to investigate</strong><span>Waiting for your direction</span></div></div>
+      <div class="panel-rule"></div>
+      <div class="panel-section-title"><span>RESEARCH APPROACH</span><span class="muted-count">01—04</span></div>
+      <div class="approach-list">
+        <div class="approach-item"><span class="approach-index">01</span><div><strong>Understand the idea</strong><p>Clarify the desired result, ingredients, equipment, and constraints.</p></div></div>
+        <div class="approach-item"><span class="approach-index">02</span><div><strong>Form hypotheses</strong><p>Identify plausible ingredient roles and questions worth testing.</p></div></div>
+        <div class="approach-item"><span class="approach-index">03</span><div><strong>Design experiments</strong><p>Define controlled variations and the measurements needed.</p></div></div>
+        <div class="approach-item pending"><span class="approach-index">04</span><div><strong>Evaluate outcomes</strong><p>Compare predictions with measured results and refine.</p></div></div>
+      </div>
+      <div class="panel-rule"></div>
+      <div class="panel-section-title"><span>WORKSPACE NOTE</span><span class="note-status">PROTOTYPE</span></div>
+      <div class="research-note"><span class="note-icon">✎</span><p>The current workspace can capture your idea and prepare a research brief. It does not yet run food-science simulations or validate recipe outcomes.</p></div>
+      <div class="researcher-footer"><span class="footer-spark">✳</span><span>Built for curiosity.<br><strong>Grounded in evidence.</strong></span></div>
+    </aside>
+  </div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <dialog class="brief-dialog" id="briefDialog"><form method="dialog"><button class="dialog-close" aria-label="Close">×</button><span class="eyebrow"><span class="eyebrow-line"></span>RESEARCH BRIEF · DRAFT</span><h2 id="briefTitle">A new chocolate creation</h2><p class="dialog-intro">Your idea has been organized into a starting brief. This is not a simulation result.</p><div class="brief-block"><span>INGREDIENTS ON THE BENCH</span><p id="briefIngredients"></p></div><div class="brief-block"><span>YOUR CREATIVE DIRECTION</span><p id="briefDescription"></p></div><div class="brief-block"><span>NEXT RESEARCH QUESTIONS</span><ul><li>What structure could produce the desired centre and crunch?</li><li>Which ingredient properties need reliable source data?</li><li>What controlled variations and measurements would distinguish candidate formulations?</li></ul></div><div class="dialog-actions"><span class="draft-status">● Draft saved in this session</span><button class="primary-button">Back to workbench <span>↗</span></button></div></form></dialog>
+  <script src="./app.js"></script>
+</body>
+</html>
